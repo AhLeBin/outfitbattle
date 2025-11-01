@@ -1,0 +1,1299 @@
+/* --- Variables & Reset --- */
+:root {
+    --bg-color: #121212;
+    --surface-color: #1e1e1e;
+    --primary-color: #bb86fc; /* Un violet futuriste */
+    --primary-variant: #3700b3;
+    --secondary-color: #03dac6;
+    --text-color: #e0e0e0;
+    --text-color-muted: #888;
+    --error-color: #cf6679;
+    --success-color: #03dac6;
+    --border-color: #333;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* --- Thème de Base --- */
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-size: 16px;
+}
+
+.container {
+    width: 100%;
+    max-width: 450px; /* Largeur d'un formulaire */
+    padding: 2rem;
+}
+
+/* --- Module d'Authentification --- */
+.auth-container {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.auth-container h1 {
+    text-align: center;
+    color: var(--primary-color);
+    font-weight: 500;
+    margin-bottom: 2rem;
+    letter-spacing: 1px;
+}
+
+/* --- Groupes de Formulaires --- */
+.input-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-color-muted);
+}
+
+.input-group input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    color: var(--text-color);
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(187, 134, 252, 0.2);
+}
+
+/* --- Boutons --- */
+.btn {
+    display: inline-block;
+    width: 100%;
+    padding: 0.9rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: #000;
+}
+
+.btn-primary:hover {
+    background-color: #a96ef6;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* --- Liens & Messages --- */
+.toggle-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.toggle-link a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.toggle-link a:hover {
+    text-decoration: underline;
+}
+
+.message {
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    text-align: center;
+    display: none; /* Caché par défaut */
+}
+
+.message.error {
+    background-color: rgba(207, 102, 121, 0.2); /* --error-color */
+    border: 1px solid var(--error-color);
+    color: var(--error-color);
+    display: block;
+}
+
+.message.success {
+    background-color: rgba(3, 218, 198, 0.2); /* --success-color */
+    border: 1px solid var(--success-color);
+    color: var(--success-color);
+    display: block;
+}
+
+/* --- Styles du Hub --- */
+
+/* Ajustement du container principal pour le hub (plus large) */
+body:has(.hub-container) .container {
+    max-width: 800px;
+}
+
+.hub-container {
+    width: 100%;
+    margin-top: 2rem;
+    padding: 1rem;
+    text-align: center;
+}
+
+/* Info utilisateur & Déconnexion */
+.user-info {
+    text-align: right;
+    margin-bottom: 2rem;
+    color: var(--text-color-muted);
+    font-size: 0.9rem;
+}
+.user-info strong {
+    color: var(--text-color);
+}
+
+.logout-link {
+    color: var(--error-color); /* Rouge pour déconnexion */
+    text-decoration: none;
+    margin-left: 0.75rem;
+    font-weight: 500;
+}
+.logout-link:hover {
+    text-decoration: underline;
+}
+
+/* Titres */
+.hub-title h1 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+.hub-title h2 {
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-bottom: 3rem;
+}
+
+/* Conteneur des deux boutons */
+.hub-actions {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem; /* Espace entre les boutons */
+}
+
+/* Style des "gros boutons" */
+.action-button {
+    flex: 1; /* Les deux boutons prennent la même largeur */
+    padding: 3rem 2rem;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative; /* Pour l'effet de survol */
+    overflow: hidden;
+}
+
+.action-button:hover {
+    transform: translateY(-5px); /* Léger décalage au survol */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.action-button .button-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.action-button .button-title {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    margin-bottom: 0.5rem;
+}
+
+.action-button .button-subtitle {
+    display: block;
+    font-size: 1rem;
+    color: var(--text-color-muted);
+}
+
+/* Couleurs spécifiques (selon le cahier des charges) */
+.action-button.create-button:hover {
+    border-color: var(--primary-color);
+}
+.action-button.create-button .button-title {
+    color: var(--primary-color);
+}
+        
+.action-button.play-button:hover {
+    border-color: var(--secondary-color);
+}
+.action-button.play-button .button-title {
+    color: var(--secondary-color);
+}
+
+
+/* --- Responsive (pour le hub) --- */
+@media (max-width: 700px) {
+    body:has(.hub-container) .container {
+        max-width: 100%;
+    }
+    .hub-container {
+        margin-top: 1rem;
+    }
+    .hub-actions {
+        flex-direction: column; /* Pile verticale sur mobile */
+    }
+    
+    .action-button {
+        padding: 2rem;
+    }
+
+    .user-info {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+}
+
+/* --- Styles Communs (Layout) --- */
+
+/* Ajustement du container pour les pages "internes" */
+body:has(.main-content) .container {
+    max-width: 1200px;
+    margin-top: 2rem;
+    align-items: flex-start; /* Aligner en haut */
+}
+
+.main-content {
+    width: 100%;
+    padding: 1.5rem;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+/* Fil d'ariane / Navigation */
+.breadcrumb {
+    font-size: 0.9rem;
+    color: var(--text-color-muted);
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+.breadcrumb a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* Titres de page */
+.main-content h2 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+.main-content .subtitle {
+    font-size: 1rem;
+    color: var(--text-color-muted);
+    margin-bottom: 2.5rem;
+}
+
+
+/* --- Galerie des Tenues (create_dashboard.php) --- */
+.outfit-gallery {
+    display: grid;
+    /* Grille responsive: 
+       - Min: 200px de large
+       - Max: 1fr (remplit l'espace)
+       - Auto-fill: ajoute autant de colonnes que possible
+    */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.outfit-card {
+    display: flex;
+    flex-direction: column;
+    height: 250px; /* Hauteur fixe pour l'alignement */
+    background-color: var(--bg-color); /* Plus sombre que la surface */
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-color);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.outfit-card:hover {
+    transform: scale(1.03);
+    border-color: var(--primary-color);
+    box-shadow: 0 5px 15px rgba(187, 134, 252, 0.1);
+}
+
+/* Style de la case "Créer" */
+.new-outfit-card {
+    justify-content: center;
+    align-items: center;
+    border-style: dashed;
+    border-width: 2px;
+    color: var(--text-color-muted);
+}
+.new-outfit-card:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+.new-outfit-card .icon-plus {
+    font-size: 3rem;
+    font-weight: 200;
+    line-height: 1;
+}
+
+/* Style des cases de tenues existantes */
+.card-image-wrapper {
+    flex-grow: 1; /* L'image prend tout l'espace sauf le nom */
+    background-color: #000; /* Fond noir si image non couvrante */
+    overflow: hidden;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recadre l'image pour remplir la case */
+    transition: transform 0.3s ease;
+}
+.outfit-card:hover .card-image {
+    transform: scale(1.05); /* Léger zoom au survol */
+}
+
+.card-name {
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+    background-color: var(--surface-color); /* Fond pour le nom */
+    border-top: 1px solid var(--border-color);
+    flex-shrink: 0; /* Empêche le nom de rétrécir */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* --- Éditeur de Tenue (edit_outfit.php) --- */
+.outfit-editor {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colonnes égales */
+    gap: 1.5rem;
+}
+
+.item-card {
+    height: 400px; /* Plus haut que les cartes de la galerie */
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.item-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 5px 15px rgba(187, 134, 252, 0.1);
+}
+
+.item-card h3 {
+    padding: 0.8rem 1rem;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    background-color: var(--surface-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.item-card-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative; /* Pour les détails superposés */
+}
+
+/* Style de l'item ajouté */
+.item-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.item-details {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    padding: 0.8rem 1rem;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+}
+.item-brand {
+    font-size: 0.9rem;
+    color: var(--text-color-muted);
+    font-weight: 400;
+}
+.item-model {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+
+/* Style du placeholder (case vide) */
+.item-placeholder-icon {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    color: var(--text-color-muted);
+}
+.item-placeholder-icon svg {
+    width: 80px;
+    height: 80px;
+    fill: currentColor;
+    opacity: 0.3;
+}
+.item-placeholder-text {
+    padding: 1rem;
+    text-align: center;
+    color: var(--text-color-muted);
+    font-style: italic;
+    background: var(--surface-color);
+}
+.item-card:hover .item-placeholder-text {
+    color: var(--primary-color);
+}
+.item-card:hover .item-placeholder-icon svg {
+    opacity: 0.6;
+    color: var(--primary-color);
+}
+
+/* --- Styles du Modal (Pop-up) --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.modal-content {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    padding: 2.5rem;
+    max-height: 90vh; /* Hauteur max */
+    overflow-y: auto; /* Défilement si contenu trop long */
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: var(--text-color-muted);
+    font-size: 2.5rem;
+    font-weight: 200;
+    cursor: pointer;
+    line-height: 1;
+}
+.modal-close:hover {
+    color: var(--text-color);
+}
+
+.modal-content h2 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+}
+
+/* Structure du formulaire dans le modal */
+.form-row {
+    display: flex;
+    gap: 1rem;
+}
+.form-row .input-group {
+    flex: 1; /* Chaque groupe prend 50% */
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Bouton secondaire */
+.btn-secondary {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+.btn-secondary:hover {
+    background-color: #2a2a2a;
+}
+/* Bouton désactivé */
+.btn:disabled {
+    background-color: var(--border-color);
+    color: var(--text-color-muted);
+    cursor: not-allowed;
+}
+.btn-primary:disabled {
+    color: var(--text-color-muted);
+}
+.btn:disabled:hover {
+    background-color: var(--border-color);
+}
+
+/* Input de type 'file' */
+input[type="file"] {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    padding: 0.6rem 1rem;
+    font-family: var(--font-family);
+    color: var(--text-color-muted);
+}
+input[type="file"]::file-selector-button {
+    background-color: var(--primary-color);
+    color: #000;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 1rem;
+    transition: background-color 0.3s;
+}
+input[type="file"]::file-selector-button:hover {
+    background-color: #a96ef6;
+}
+.input-group small {
+    font-size: 0.8rem;
+    color: var(--text-color-muted);
+    margin-top: 0.5rem;
+    display: block;
+}
+
+
+/* --- Responsive (pour l'éditeur) --- */
+@media (max-width: 800px) {
+    .outfit-editor {
+        grid-template-columns: 1fr; /* Une seule colonne sur mobile */
+    }
+    .item-card {
+        height: 350px; /* Un peu moins haut */
+    }
+}
+
+/* --- Styles du Lobby (play_lobby.php) --- */
+
+.lobby-step-container {
+    margin-top: 2rem;
+}
+
+/* --- Choix du Rôle --- */
+.role-selector {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+}
+
+.role-card {
+    flex: 1;
+    padding: 2.5rem 2rem;
+    background-color: var(--bg-color);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.role-card:hover {
+    border-color: var(--primary-color);
+    background-color: var(--surface-color);
+    transform: translateY(-5px);
+}
+
+.role-card .role-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+.role-card .role-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+.role-card .role-desc {
+    font-size: 0.9rem;
+    color: var(--text-color-muted);
+}
+.role-card:hover .role-title {
+    color: var(--primary-color);
+}
+
+/* --- Créer / Rejoindre --- */
+.join-options {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+.join-card {
+    flex: 1;
+    padding: 2rem;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+.join-card h3 {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+.join-card p {
+    color: var(--text-color-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    min-height: 40px; /* Aligner les boutons */
+}
+
+/* Champ de code */
+.code-input {
+    font-family: var(--font-family);
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+.code-input::placeholder {
+    color: var(--text-color-muted);
+    opacity: 0.5;
+}
+.code-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(187, 134, 252, 0.2);
+}
+
+/* Formulaire pour rejoindre */
+#join-game-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Bouton "Changer de rôle" */
+.btn-link {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    margin-top: 1.5rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --- Responsive (pour le lobby) --- */
+@media (max-width: 700px) {
+    .role-selector,
+    .join-options {
+        flex-direction: column;
+    }
+    .join-card p {
+        min-height: auto; /* Plus besoin d'aligner */
+    }
+}
+
+/* --- Styles de la Salle d'attente (game_session.php) --- */
+
+.game-code-display {
+    background-color: var(--bg-color);
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+.game-code-display span {
+    font-size: 1rem;
+    color: var(--text-color-muted);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+.game-code-display strong {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--secondary-color); /* Vert/Cyan pour le code */
+    letter-spacing: 8px;
+}
+
+.lobby-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* 2/3 pour la liste, 1/3 pour le statut */
+    gap: 2rem;
+}
+
+.lobby-column h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Liste des participants */
+.participant-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.participant-list li {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+}
+.participant-list .p-email {
+    font-weight: 500;
+}
+.participant-list .p-role {
+    font-size: 0.9rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 700;
+}
+.participant-list .p-role-joueur {
+    background-color: rgba(187, 134, 252, 0.2); /* --primary-color */
+    color: var(--primary-color);
+}
+.participant-list .p-role-juge {
+    background-color: rgba(3, 218, 198, 0.2); /* --secondary-color */
+    color: var(--secondary-color);
+}
+.participant-list .host-tag {
+    font-size: 0.9rem;
+    color: var(--text-color-muted);
+    font-style: italic;
+    margin-left: 1rem;
+}
+
+/* Statut (Actions) */
+#status-container {
+    padding: 1rem;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    text-align: center;
+}
+.btn-large {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.2rem;
+}
+.status-message {
+    font-size: 0.9rem;
+    color: var(--text-color-muted);
+    margin-top: 1rem;
+}
+.status-message.success {
+    color: var(--success-color);
+}
+
+/* Spinner (animation d'attente) */
+.spinner {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+}
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* --- Responsive (pour le lobby) --- */
+@media (max-width: 800px) {
+    .lobby-layout {
+        grid-template-columns: 1fr; /* Une seule colonne */
+    }
+    .lobby-column:last-child {
+        margin-top: 2rem;
+    }
+    .game-code-display strong {
+        font-size: 2rem;
+        letter-spacing: 4px;
+    }
+}
+
+/* --- Styles de l'écran d'attente (réutilisable) --- */
+.waiting-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    padding: 2rem;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-color-muted);
+    text-align: center;
+}
+.waiting-screen .spinner {
+    /* Le spinner existe déjà, on ajuste la taille */
+    width: 2.5rem;
+    height: 2.5rem;
+    border-width: 4px;
+    margin-bottom: 1.5rem;
+}
+.waiting-screen h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+.waiting-screen p {
+    font-size: 1rem;
+}
+
+/* --- Styles de la galerie de sélection (game_phase_1.php) --- */
+.selection-gallery .outfit-card.incomplete {
+    cursor: not-allowed;
+    position: relative;
+    opacity: 0.5;
+}
+.selection-gallery .outfit-card.incomplete:hover {
+    transform: none;
+    border-color: var(--border-color); /* Pas d'effet de survol */
+    box-shadow: none;
+}
+.incomplete-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--error-color);
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(2px);
+    text-transform: uppercase;
+}
+
+/* État "sélectionné" */
+.selection-gallery.disabled {
+    opacity: 0.7;
+    pointer-events: none;
+}
+.selection-gallery .outfit-card.selected {
+    border: 2px solid var(--secondary-color);
+    box-shadow: 0 0 20px rgba(3, 218, 198, 0.3);
+    transform: scale(1.05);
+}
+
+/* --- Styles de l'application de Vote (Phase 2 & 3) --- */
+
+#voting-app {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Barre de progression */
+.vote-progress {
+    width: 100%;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 3px;
+    position: relative;
+    height: 30px;
+    margin-bottom: 2rem;
+}
+.progress-bar {
+    height: 100%;
+    background-color: var(--primary-color);
+    border-radius: 17px;
+    width: 0%;
+    transition: width 0.5s ease;
+}
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--text-color);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px #000;
+}
+
+/* Carte de l'article */
+.vote-card {
+    background-color: var(--surface-color);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+}
+.vote-image-wrapper {
+    width: 100%;
+    height: 500px;
+    background-color: #000;
+}
+.vote-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* ou 'contain' si on veut tout voir */
+}
+.vote-details {
+    padding: 1.5rem;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+}
+.vote-details h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    color: var(--text-color);
+}
+.vote-details p {
+    font-size: 1rem;
+    color: var(--text-color-muted);
+}
+
+/* Zone de notation */
+.rating-container {
+    text-align: center;
+}
+.rating-container p {
+    margin-bottom: 1rem;
+    color: var(--text-color-muted);
+}
+.rating-stars {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+.star-btn {
+    font-family: var(--font-family);
+    width: 45px;
+    height: 45px;
+    border: 1px solid var(--border-color);
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+.star-btn:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #000;
+    transform: scale(1.1);
+}
+.star-btn.selected {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: #000;
+    transform: scale(1.1);
+}
+
+/* --- Responsive (pour le vote) --- */
+@media (max-width: 700px) {
+    .vote-image-wrapper {
+        height: 400px;
+    }
+    .star-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+}
+
+/* --- Styles de la carte de vote de Tenue (Phase 3) --- */
+.outfit-vote-card .outfit-display {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    height: 350px;
+    background-color: #000;
+}
+.outfit-vote-card .outfit-display img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-right: 1px solid var(--border-color);
+}
+.outfit-vote-card .outfit-display img:last-child {
+    border-right: none;
+}
+
+/* On ré-utilise .vote-details */
+.outfit-vote-card .vote-details #outfit-owner {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+.outfit-vote-card .vote-details #outfit-name {
+    color: var(--text-color-muted);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* --- Responsive (pour vote tenue) --- */
+@media (max-width: 700px) {
+    .outfit-vote-card .outfit-display {
+        height: 200px; /* Plus petit sur mobile */
+    }
+}
+
+/* --- Styles de la Page des Résultats --- */
+
+.results-list {
+    list-style: none;
+    padding: 0;
+    margin: 2.5rem 0;
+}
+
+.result-item {
+    display: flex;
+    align-items: center;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.result-rank {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-right: 1.5rem;
+    color: var(--text-color);
+    width: 60px;
+    text-align: center;
+}
+
+.result-player {
+    flex-grow: 1;
+}
+.result-player strong {
+    display: block;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 0.25rem;
+}
+.result-player span {
+    font-size: 0.9rem;
+    color: var(--text-color-muted);
+    font-style: italic;
+}
+
+.result-score {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* Style du Vainqueur */
+.result-item.winner {
+    border-color: var(--primary-color);
+    box-shadow: 0 5px 20px rgba(187, 134, 252, 0.2);
+}
+.result-item.winner .result-rank {
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+.result-item.winner .result-score {
+    color: var(--primary-color);
+}
+
+/* --- Mon Récapitulatif --- */
+.score-breakdown {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+.score-breakdown h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.breakdown-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.breakdown-category {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+.breakdown-category h4 {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.breakdown-category ul {
+    list-style: disc;
+    margin-left: 1.2rem;
+    color: var(--text-color-muted);
+    font-size: 0.9rem;
+}
+.breakdown-category ul li {
+    margin-bottom: 0.5rem;
+}
+.breakdown-category .category-score {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: right;
+    margin-top: 1.5rem;
+    color: var(--text-color);
+}
+.breakdown-category .category-score::before {
+    content: '+';
+    margin-right: 0.25rem;
+}
+
+.breakdown-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--surface-color);
+    border: 1px solid var(--primary-color);
+    padding: 1.5rem 2rem;
+    border-radius: 8px;
+    margin-top: 2rem;
+}
+.breakdown-total span {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+.breakdown-total strong {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* --- Responsive (pour les résultats) --- */
+@media (max-width: 700px) {
+    .breakdown-grid {
+        grid-template-columns: 1fr;
+    }
+    .result-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 1.5rem;
+    }
+    .result-rank {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+    .result-score {
+        margin-top: 1rem;
+        font-size: 1.8rem;
+    }
+    .breakdown-total {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+    .breakdown-total strong {
+        font-size: 2rem;
+    }
+}

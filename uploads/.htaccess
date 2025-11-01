@@ -1,0 +1,5 @@
+# Désactiver l'exécution de scripts
+<FilesMatch "\.(php|phtml|php3|php4|php5|php7|pl|py|cgi)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>

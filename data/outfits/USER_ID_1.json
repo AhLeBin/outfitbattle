@@ -1,0 +1,50 @@
+[
+  {
+    "outfit_id": "o_1a2b3c4d",
+    "name": "Tenue Quotidienne",
+    "last_modified": "2025-11-01T11:00:00Z",
+    "top": {
+      "item_id": "i_top1",
+      "brand": "Marque A",
+      "model": "T-Shirt Simple",
+      "price": 25.50,
+      "delivery_price": 4.99,
+      "delivery_date": "2025-10-15",
+      "photo_url": "/uploads/u_6a8f3b9e1c2d4/top_abc.jpg"
+    },
+    "bottom": {
+      "item_id": "i_bot1",
+      "brand": "Marque B",
+      "model": "Jean Brut",
+      "price": 80.00,
+      "delivery_price": 0.00,
+      "delivery_date": "2025-10-10",
+      "photo_url": "/uploads/u_6a8f3b9e1c2d4/bottom_def.jpg"
+    },
+    "shoes": null
+  },
+  {
+    "outfit_id": "o_5e6f7g8h",
+    "name": "Look de Soirée",
+    "last_modified": "2025-10-28T09:15:00Z",
+    "top": {
+      "item_id": "i_top2",
+      "brand": "Marque C",
+      "model": "Chemise en soie",
+      "price": 120.00,
+      "delivery_price": 10.00,
+      "delivery_date": "2025-10-20",
+      "photo_url": "/uploads/u_6a8f3b9e1c2d4/top_ghi.jpg"
+    },
+    "bottom": null,
+    "shoes": {
+      "item_id": "i_shoe1",
+      "brand": "Marque D",
+      "model": "Mocassins cuir",
+      "price": 150.00,
+      "delivery_price": 5.00,
+      "delivery_date": "2025-10-18",
+      "photo_url": "/uploads/u_6a8f3b9e1c2d4/shoes_jkl.jpg"
+    }
+  }
+]
