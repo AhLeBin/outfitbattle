@@ -43,6 +43,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- Fonction 2: Afficher un article ---
     function displayArticle(index) {
+        // *** CORRECTION: Mettre à jour l'index global ***
+        currentArticleIndex = index;
+
         if (index >= articles.length) {
             showWaitingScreen();
             return;
@@ -74,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
             selfVoteMessage.style.display = 'block';
             // Passer automatiquement au suivant après un délai
             setTimeout(() => {
-                displayArticle(index + 1);
+                displayArticle(index + 1); // La variable sera mise à jour au prochain appel
             }, 2000); // 2 sec
         } else {
             ratingContainer.style.display = 'block';
@@ -83,6 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- Fonction 3: Soumettre le vote (AJAX) ---
     async function submitVote(score) {
+        // 'currentArticleIndex' est maintenant correct
         const article = articles[currentArticleIndex];
         const itemId = article.item_id;
 
@@ -103,8 +107,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (result.success) {
                 // Succès, passer à l'article suivant
-                currentArticleIndex++;
-                displayArticle(currentArticleIndex);
+                // *** CORRECTION: Appeler displayArticle avec le nouvel index ***
+                displayArticle(currentArticleIndex + 1);
             } else {
                 alert(`Erreur: ${result.message}`);
                 // Ré-afficher les boutons si échec

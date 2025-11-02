@@ -40,7 +40,7 @@ foreach ($player_selections as $owner_id => $outfit) {
 shuffle($all_outfits); // Mélanger l'ordre de vote
 
 // Étape 4: Récupérer les votes DÉJÀ faits
-$outfit_votes = $game_data['game_data']['outfit_votes'] ?? (object)[];
+$outfit_votes = $game_data['game_data']['outfit_votes'] ?? [];
 
 
 require_once __DIR__ . '/includes/header.php';
@@ -108,6 +108,6 @@ require_once __DIR__ . '/includes/header.php';
     const ALL_OUTFITS = <?php echo json_encode($all_outfits); ?>;
     const EXISTING_VOTES = <?php echo json_encode($outfit_votes); ?>;
 </script>
-<script src="/js/game_flow_outfits.js"></script>
+<script src="/js/game_flow_outfits.js?v=1.1"></script>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>

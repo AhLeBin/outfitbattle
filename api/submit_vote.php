@@ -29,21 +29,24 @@ if (!$handle || !flock($handle, LOCK_EX)) {
     if ($handle) fclose($handle);
     echo json_encode($response); exit;
 }
+// LIRE COMME UN TABLEAU (true)
 $game_data = json_decode(stream_get_contents($handle), true);
 
 // 3. Vérification de sécurité: Ne pas voter pour soi-même
-// Trouver le propriétaire de l'article/tenue
 $owner_id = null;
 if ($vote_type === 'item') {
-    // Il faut chercher dans toutes les tenues de tous les joueurs...
     foreach ($game_data['game_data']['player_selections'] as $player_uid => $outfit) {
-        if (($outfit['top']['item_id'] ?? '') === $subject_id) $owner_id = $player_uid;
-        if (($outfit['bottom']['item_id'] ?? '') === $subject_id) $owner_id = $player_uid;
-        if (($outfit['shoes']['item_id'] ?? '') === $subject_id) $owner_id = $player_uid;
-        if ($owner_id) break;
+        if (isset($outfit['top']['item_id']) && $outfit['top']['item_id'] === $subject_id) {
+            $owner_id = $player_uid; break;
+        }
+        if (isset($outfit['bottom']['item_id']) && $outfit['bottom']['item_id'] === $subject_id) {
+            $owner_id = $player_uid; break;
+        }
+        if (isset($outfit['shoes']['item_id']) && $outfit['shoes']['item_id'] === $subject_id) {
+            $owner_id = $player_uid; break;
+        }
     }
-} else { // $vote_type === 'outfit'
-    // Pour les tenues, le $subject_id EST le $owner_id
+} else { 
     if (isset($game_data['game_data']['player_selections'][$subject_id])) {
         $owner_id = $subject_id;
     }
@@ -55,21 +58,21 @@ if ($owner_id === $user_id) {
     echo json_encode($response); exit;
 }
 
-// 4. Enregistrer le vote
+// 4. Enregistrer le vote (EN UTILISANT DES TABLEAUX)
 $vote_key = $vote_type === 'item' ? 'item_votes' : 'outfit_votes';
 if (!isset($game_data['game_data'][$vote_key])) {
-    $game_data['game_data'][$vote_key] = (object)[];
+    $game_data['game_data'][$vote_key] = []; // CORRIGÉ
 }
 if (!isset($game_data['game_data'][$vote_key][$subject_id])) {
-    $game_data['game_data'][$vote_key][$subject_id] = (object)[];
+    $game_data['game_data'][$vote_key][$subject_id] = []; // CORRIGÉ
 }
 $game_data['game_data'][$vote_key][$subject_id][$user_id] = $score;
 
 
-// 5. VÉRIFIER SI LA PHASE EST TERMINÉE (la partie la plus complexe)
+// 5. VÉRIFIER SI LA PHASE EST TERMINÉE
 $total_votes_cast = 0;
 foreach ($game_data['game_data'][$vote_key] as $subject => $voters) {
-    $total_votes_cast += count((array)$voters);
+    $total_votes_cast += count($voters); // CORRIGÉ: Plus besoin de (array)
 }
 
 $participants_count = count($game_data['participants']);
@@ -81,18 +84,18 @@ if ($vote_type === 'item') {
     $total_expected_votes = $total_articles * ($participants_count - 1);
     
     if ($total_votes_cast === $total_expected_votes) {
-        $game_data['status'] = 'phase3'; // On passe à la phase 3
+        $game_data['status'] = 'phase3'; 
     }
     
 } else { // $vote_type === 'outfit'
     $total_expected_votes = $player_count * ($participants_count - 1);
     
     if ($total_votes_cast === $total_expected_votes) {
-        $game_data['status'] = 'results'; // On passe aux résultats
+        $game_data['status'] = 'results'; 
     }
 }
-$response['total_votes_cast'] = $total_votes_cast; // Debug
-$response['total_expected_votes'] = $total_expected_votes; // Debug
+$response['total_votes_cast'] = $total_votes_cast;
+$response['total_expected_votes'] = $total_expected_votes;
 
 
 // 6. Sauvegarder et déverrouiller

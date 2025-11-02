@@ -46,9 +46,9 @@ $new_game_data = [
         ]
     ],
     'game_data' => [
-        'player_selections' => (object)[], // Utiliser (object) pour JSON {}
-        'item_votes' => (object)[],
-        'outfit_votes' => (object)[]
+        'player_selections' => [], // CORRIGÉ: Doit être un tableau
+        'item_votes' => [],        // CORRIGÉ: Doit être un tableau
+        'outfit_votes' => []       // CORRIGÉ: Doit être un tableau
     ]
 ];
 

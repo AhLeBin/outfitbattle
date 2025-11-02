@@ -47,9 +47,9 @@ function calculate_score_min($value, $min, $max) {
 
 
 // Initialiser les structures de données
-$player_selections = (array)$game_data['game_data']['player_selections'];
-$item_votes = (array)$game_data['game_data']['item_votes'];
-$outfit_votes = (array)$game_data['game_data']['outfit_votes'];
+$player_selections = $game_data['game_data']['player_selections'] ?? [];
+$item_votes = $game_data['game_data']['item_votes'] ?? [];
+$outfit_votes = $game_data['game_data']['outfit_votes'] ?? [];
 
 $all_players_data = []; // Le tableau final des scores
 

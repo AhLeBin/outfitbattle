@@ -63,7 +63,7 @@ require_once __DIR__ . '/includes/header.php';
 
 </div>
 
-<script src="/js/game_lobby.js"></script>
+<script src="/js/game_lobby.js?v=1.1"></script>
 
 <?php
 // Étape 3: Inclure le footer

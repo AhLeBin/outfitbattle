@@ -155,6 +155,6 @@ function render_item_card($item_type, $item_data) {
     </div>
 </div>
 
-<script src="/js/outfit_editor.js"></script>
+<script src="/js/outfit_editor.js?v=1.1"></script>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>

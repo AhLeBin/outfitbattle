@@ -46,8 +46,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // --- Fonction 2: Afficher une tenue ---
+   // --- Fonction 2: Afficher une tenue ---
     function displayOutfit(index) {
+        // *** CORRECTION: Mettre à jour l'index global ***
+        currentOutfitIndex = index;
+
         if (index >= outfits.length) {
             showWaitingScreen();
             return;
@@ -87,6 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- Fonction 3: Soumettre le vote (AJAX) ---
     async function submitVote(score) {
+        // 'currentOutfitIndex' est maintenant correct
         const outfit = outfits[currentOutfitIndex];
         const ownerId = outfit.owner_id; // L'ID du sujet est l'ID du propriétaire
 
@@ -107,8 +111,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (result.success) {
                 // Succès, passer à l'article suivant
-                currentOutfitIndex++;
-                displayOutfit(currentOutfitIndex);
+                // *** CORRECTION: Appeler displayOutfit avec le nouvel index ***
+                displayOutfit(currentOutfitIndex + 1);
             } else {
                 alert(`Erreur: ${result.message}`);
                 // Ré-afficher les boutons si échec

@@ -1,98 +1,87 @@
 document.addEventListener("DOMContentLoaded", () => {
+    
+    // Éléments du formulaire
+    const authForm = document.getElementById("auth-form");
+    const authMessage = document.getElementById("auth-message");
+    const confirmGroup = document.getElementById("confirm-password-group");
 
-    const loginFormContainer = document.getElementById("login-form-container");
-    const registerFormContainer = document.getElementById("register-form-container");
-    const showRegisterLink = document.getElementById("show-register");
-    const showLoginLink = document.getElementById("show-login");
+    // Champs
+    const usernameField = document.getElementById("auth-username");
+    const passwordField = document.getElementById("auth-password");
+    const confirmField = document.getElementById("auth-confirm-password");
 
-    const loginForm = document.getElementById("login-form");
-    const registerForm = document.getElementById("register-form");
+    // Boutons
+    const loginBtn = document.getElementById("login-btn");
+    const showRegisterBtn = document.getElementById("show-register-btn");
+    const registerBtn = document.getElementById("register-btn");
+    const showLoginBtn = document.getElementById("show-login-btn");
 
-    const loginMessage = document.getElementById("login-message");
-    const registerMessage = document.getElementById("register-message");
-
-    // --- Bascule entre les formulaires ---
-    showRegisterLink.addEventListener("click", (e) => {
-        e.preventDefault();
-        loginFormContainer.style.display = "none";
-        registerFormContainer.style.display = "block";
-        loginMessage.style.display = "none";
-    });
-
-    showLoginLink.addEventListener("click", (e) => {
-        e.preventDefault();
-        registerFormContainer.style.display = "none";
-        loginFormContainer.style.display = "block";
-        registerMessage.style.display = "none";
-    });
-
-    // --- Gestionnaire de messages (erreur/succès) ---
-    function showMessage(element, message, isError = true) {
-        element.textContent = message;
-        element.className = isError ? 'message error' : 'message success';
+    // --- Gestionnaire de messages ---
+    function showMessage(message, isError = true) {
+        authMessage.textContent = message;
+        authMessage.className = isError ? 'message error' : 'message success';
+        authMessage.style.display = "block";
     }
 
-    // --- Soumission du formulaire d'inscription ---
-    registerForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        registerMessage.style.display = "none";
-
-        const email = document.getElementById("register-email").value;
-        const password = document.getElementById("register-password").value;
-        const confirmPassword = document.getElementById("register-confirm-password").value;
-
-        // 1. Validation côté client
-        if (password !== confirmPassword) {
-            showMessage(registerMessage, "Les mots de passe ne correspondent pas.");
-            return;
-        }
-        if (password.length < 6) {
-            showMessage(registerMessage, "Le mot de passe doit faire au moins 6 caractères.");
-            return;
-        }
-
-        // 2. Préparation des données pour l'API
-        const formData = new FormData();
-        formData.append('email', email);
-        formData.append('password', password);
-
-        // 3. Appel AJAX (Fetch)
-        try {
-            const response = await fetch('/api/register.php', {
-                method: 'POST',
-                body: formData
-            });
-
-            const result = await response.json();
-
-            if (result.success) {
-                showMessage(registerMessage, result.message, false);
-                // On bascule vers le formulaire de connexion après succès
-                setTimeout(() => {
-                    showLoginLink.click();
-                    loginMessage.textContent = "Compte créé. Veuillez vous connecter.";
-                    loginMessage.className = 'message success';
-                    document.getElementById("login-email").value = email; // Pré-remplir l'email
-                }, 2000);
-            } else {
-                showMessage(registerMessage, result.message);
-            }
-
-        } catch (error) {
-            showMessage(registerMessage, "Erreur réseau. Veuillez réessayer.");
-        }
+    // --- Bascule vers l'inscription ---
+    showRegisterBtn.addEventListener("click", () => {
+        loginBtn.style.display = "none";
+        showRegisterBtn.style.display = "none";
+        
+        registerBtn.style.display = "block";
+        showLoginBtn.style.display = "block";
+        confirmGroup.style.display = "block";
+        
+        authMessage.style.display = "none";
+        confirmField.required = true;
     });
 
+    // --- Bascule vers la connexion ---
+    showLoginBtn.addEventListener("click", () => {
+        loginBtn.style.display = "block";
+        showRegisterBtn.style.display = "block";
+        
+        registerBtn.style.display = "none";
+        showLoginBtn.style.display = "none";
+        confirmGroup.style.display = "none";
 
-    // --- Soumission du formulaire de connexion ---
-    loginForm.addEventListener("submit", async (e) => {
+        authMessage.style.display = "none";
+        confirmField.required = false;
+    });
+
+    // --- Gestion de la soumission (Connexion) ---
+    loginBtn.addEventListener("click", async (e) => {
         e.preventDefault();
-        loginMessage.style.display = "none";
+        await handleSubmit('login');
+    });
 
-        const formData = new FormData(loginForm);
+    // --- Gestion de la soumission (Inscription) ---
+    registerBtn.addEventListener("click", async (e) => {
+        e.preventDefault();
+        
+        // Validation côté client
+        if (passwordField.value !== confirmField.value) {
+            showMessage("Les mots de passe ne correspondent pas.");
+            return;
+        }
+        if (passwordField.value.length < 6) {
+            showMessage("Le mot de passe doit faire au moins 6 caractères.");
+            return;
+        }
+        
+        await handleSubmit('register');
+    });
+
+    // --- Fonction de soumission générique ---
+    async function handleSubmit(action) {
+        authMessage.style.display = "none";
+        
+        const formData = new FormData(authForm);
+        // Ajoute l'action au FormData
+        formData.append('action', action);
 
         try {
-            const response = await fetch('/api/login.php', {
+            const response = await fetch('/api/auth.php', {
                 method: 'POST',
                 body: formData
             });
@@ -100,17 +89,18 @@ document.addEventListener("DOMContentLoaded", () => {
             const result = await response.json();
 
             if (result.success) {
-                showMessage(loginMessage, result.message, false);
+                showMessage(result.message, false);
                 // Redirection vers le hub
                 setTimeout(() => {
                     window.location.href = '/hub.php';
                 }, 1000);
             } else {
-                showMessage(loginMessage, result.message);
+                showMessage(result.message);
             }
 
         } catch (error) {
-            showMessage(loginMessage, "Erreur réseau. Veuillez réessayer.");
+            console.error("Erreur Fetch:", error);
+            showMessage("Erreur réseau. Veuillez réessayer.");
         }
-    });
+    }
 });

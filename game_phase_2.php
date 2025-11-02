@@ -63,7 +63,7 @@ $total_expected_votes = $total_articles * ($all_participants_count - 1);
 
 
 // Étape 4: Récupérer les votes DÉJÀ faits
-$item_votes = $game_data['game_data']['item_votes'] ?? (object)[];
+$item_votes = $game_data['game_data']['item_votes'] ?? [];
 
 
 require_once __DIR__ . '/includes/header.php';
@@ -134,6 +134,6 @@ require_once __DIR__ . '/includes/header.php';
     const EXISTING_VOTES = <?php echo json_encode($item_votes); ?>;
     const TOTAL_EXPECTED_VOTES = <?php echo $total_expected_votes; ?>;
 </script>
-<script src="/js/game_flow.js"></script>
+<script src="/js/game_flow.js?v=1.1"></script>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>

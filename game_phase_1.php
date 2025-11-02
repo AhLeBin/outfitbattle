@@ -104,6 +104,6 @@ require_once __DIR__ . '/includes/header.php';
     const GAME_CODE = "<?php echo $game_code; ?>";
     const HAS_SELECTED = <?php echo $has_already_selected ? 'true' : 'false'; ?>;
 </script>
-<script src="/js/game_phase_1.js"></script>
+<script src="/js/game_phase_1.js?v=1.1"></script>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>

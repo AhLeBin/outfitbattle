@@ -11,46 +11,37 @@ if (isset($_SESSION['user_id'])) {
 <div class="auth-container">
 
     <div id="login-form-container">
-        <h1>Connexion</h1>
-        <form id="login-form">
-            <div id="login-message" class="message"></div>
+        <h1>Connexion / Inscription</h1>
+        <form id="auth-form">
+            <div id="auth-message" class="message" style="display: none;"></div>
+            
             <div class="input-group">
-                <label for="login-email">Email</label>
-                <input type="email" id="login-email" name="email" required>
+                <label for="auth-username">Nom d'utilisateur</label>
+                <input type="text" id="auth-username" name="username" required>
             </div>
+            
             <div class="input-group">
-                <label for="login-password">Mot de passe</label>
-                <input type="password" id="login-password" name="password" required>
+                <label for="auth-password">Mot de passe</label>
+                <input type="password" id="auth-password" name="password" required>
             </div>
-            <button type="submit" class="btn btn-primary">Entrer</button>
-        </form>
-        <p class="toggle-link">Pas de compte ? <a href="#" id="show-register">S'inscrire</a></p>
-    </div>
 
-    <div id="register-form-container" style="display: none;">
-        <h1>Inscription</h1>
-        <form id="register-form">
-            <div id="register-message" class="message"></div>
-            <div class="input-group">
-                <label for="register-email">Email</label>
-                <input type="email" id="register-email" name="email" required>
+            <div class="input-group" id="confirm-password-group" style="display: none;">
+                <label for="auth-confirm-password">Confirmer le mot de passe</label>
+                <input type="password" id="auth-confirm-password" name="confirm_password">
             </div>
-            <div class="input-group">
-                <label for="register-password">Mot de passe</label>
-                <input type="password" id="register-password" name="password" required>
+
+            <div class="form-actions" style="display: flex; flex-direction: column; gap: 1rem;">
+                <button type="submit" id="login-btn" class="btn btn-primary">Se connecter</button>
+                <button type="button" id="show-register-btn" class="btn btn-secondary">Créer un compte</button>
+                <button type="submit" id="register-btn" class="btn btn-primary" style="display: none;">Valider l'inscription</button>
+                <button type="button" id="show-login-btn" class="btn-link" style="display: none; margin-top: 0;">Annuler</button>
             </div>
-            <div class="input-group">
-                <label for="register-confirm-password">Confirmer le mot de passe</label>
-                <input type="password" id="register-confirm-password" name="confirm_password" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Créer le compte</button>
         </form>
-        <p class="toggle-link">Déjà un compte ? <a href="#" id="show-login">Se connecter</a></p>
     </div>
 
 </div>
 
-<script src="/js/auth.js"></script>
+<script src="/js/auth.js?v=1.1"></script>
 
 <?php
 require_once __DIR__ . '/includes/footer.php';

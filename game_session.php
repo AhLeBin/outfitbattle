@@ -84,7 +84,7 @@ require_once __DIR__ . '/includes/header.php';
     const IS_HOST = <?php echo $is_host ? 'true' : 'false'; ?>;
     const GAME_CODE = "<?php echo htmlspecialchars($game_code); ?>";
 </script>
-<script src="/js/game_session.js"></script>
+<script src="/js/game_session.js?v=1.1"></script>
 
 <?php
 // Étape 4: Inclure le footer
