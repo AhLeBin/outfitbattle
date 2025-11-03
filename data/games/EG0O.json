@@ -1,0 +1,101 @@
+{
+    "game_id": "EG0O",
+    "host_id": "u_690690c7b117e",
+    "created_at": "2025-11-02T03:09:53-05:00",
+    "status": "phase2",
+    "participants": [
+        {
+            "user_id": "u_690690c7b117e",
+            "email": "Test",
+            "role": "joueur"
+        },
+        {
+            "user_id": "u_69068ed0c1942",
+            "email": "albin",
+            "role": "joueur"
+        }
+    ],
+    "game_data": {
+        "player_selections": {
+            "u_690690c7b117e": {
+                "outfit_id": "o_690690d45993f",
+                "name": "Nouvelle Tenue 1",
+                "last_modified": "2025-11-01T19:00:59-04:00",
+                "top": {
+                    "item_id": "i_690690ed94b2f",
+                    "brand": "Kaja",
+                    "model": "",
+                    "price": 12,
+                    "delivery_price": 0,
+                    "delivery_date": "2025-09-10",
+                    "photo_url": "\/uploads\/u_690690c7b117e\/top_o_690690d45993f_690690ed94149.jpg"
+                },
+                "bottom": {
+                    "item_id": "i_6906910adf13b",
+                    "brand": "Zozuzvzv",
+                    "model": "",
+                    "price": 1388,
+                    "delivery_price": 0,
+                    "delivery_date": "2025-02-04",
+                    "photo_url": "\/uploads\/u_690690c7b117e\/bottom_o_690690d45993f_6906910ade63f.jpg"
+                },
+                "shoes": {
+                    "item_id": "i_6906912be9823",
+                    "brand": "Zjzhzhzjz",
+                    "model": "",
+                    "price": 3,
+                    "delivery_price": 0,
+                    "delivery_date": "1987-11-02",
+                    "photo_url": "\/uploads\/u_690690c7b117e\/shoes_o_690690d45993f_6906912be9184.jpg"
+                }
+            },
+            "u_69068ed0c1942": {
+                "outfit_id": "o_69068f2e61ca0",
+                "name": "Nouvelle Tenue 1",
+                "last_modified": "2025-11-01T18:57:39-04:00",
+                "top": {
+                    "item_id": "i_69068f894bdb5",
+                    "brand": "Coreiz",
+                    "model": "",
+                    "price": 120,
+                    "delivery_price": 10,
+                    "delivery_date": "1999-04-10",
+                    "photo_url": "\/uploads\/u_69068ed0c1942\/top_o_69068f2e61ca0_69068f894bab5.jpg"
+                },
+                "bottom": {
+                    "item_id": "i_690690041584a",
+                    "brand": "jean",
+                    "model": "",
+                    "price": 20,
+                    "delivery_price": 3,
+                    "delivery_date": "2025-10-11",
+                    "photo_url": "\/uploads\/u_69068ed0c1942\/bottom_o_69068f2e61ca0_6906900415552.jpg"
+                },
+                "shoes": {
+                    "item_id": "i_690690637e97d",
+                    "brand": "Off white",
+                    "model": " be right back",
+                    "price": 395,
+                    "delivery_price": 0,
+                    "delivery_date": "2025-11-01",
+                    "photo_url": "\/uploads\/u_69068ed0c1942\/shoes_o_69068f2e61ca0_690690637e666.jpg"
+                }
+            }
+        },
+        "item_votes": {
+            "i_690690637e97d": {
+                "u_690690c7b117e": 9
+            },
+            "i_690690ed94b2f": {
+                "u_69068ed0c1942": 2
+            },
+            "i_690690041584a": {
+                "u_690690c7b117e": 10
+            },
+            "i_69068f894bdb5": {
+                "u_690690c7b117e": 8
+            }
+        },
+        "outfit_votes": []
+    }
+}

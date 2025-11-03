@@ -1,14 +1,26 @@
 [
-  {
-    "user_id": "u_6a8f3b9e1c2d4",
-    "email": "joueur1@exemple.com",
-    "password_hash": "$2y$10$Z.g... (hash généré par password_hash())",
-    "created_at": "2025-11-01T10:00:00Z"
-  },
-  {
-    "user_id": "u_7b9c2a4f5e1d8",
-    "email": "juge@exemple.com",
-    "password_hash": "$2y$10$Y.a... (un autre hash)",
-    "created_at": "2025-11-01T10:05:00Z"
-  }
+    {
+        "user_id": "u_6a8f3b9e1c2d4",
+        "email": "joueur1@exemple.com",
+        "password_hash": "$2y$10$Z.g... (hash généré par password_hash())",
+        "created_at": "2025-11-01T10:00:00Z"
+    },
+    {
+        "user_id": "u_7b9c2a4f5e1d8",
+        "email": "juge@exemple.com",
+        "password_hash": "$2y$10$Y.a... (un autre hash)",
+        "created_at": "2025-11-01T10:05:00Z"
+    },
+    {
+        "user_id": "u_69068ed0c1942",
+        "username": "albin",
+        "password_hash": "$2y$10$PyMctdE9IfPCXSXomSnfG.j\/XkQEA3SdYKV\/raToYU0Q7.LwsPafG",
+        "created_at": "2025-11-01T18:50:56-04:00"
+    },
+    {
+        "user_id": "u_690690c7b117e",
+        "username": "Test",
+        "password_hash": "$2y$10$joeaysoVoGoOpC7XQlVDXeYGMpHITu4.HThRC7WOR65QK\/\/jggNt6",
+        "created_at": "2025-11-01T18:59:19-04:00"
+    }
 ]
